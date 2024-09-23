@@ -11,6 +11,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --background: #2F4550;
+  --background2: #B8DBD9;
+  --color1: #000;
+  --color2: #586F7C;
+  --color3: #F4F4F9;
+
+
 }
 
 a {
@@ -28,11 +36,13 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--color3);
 }
 
 button {
@@ -54,6 +64,85 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/*
+Dashboard Screen
+*/
+.MainBlock {
+  display: flex;
+  flex-direction: column;
+}
+.FormBlock {
+  background-color: var(--background2) ;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 30px;
+  border: 2px solid;
+  width: 70%;
+  align-self: center;
+}
+h1 {
+  color: var(--color2);
+  font-weight: bolder;
+  font-size: 30px;
+}
+label {
+  margin: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+input {
+  margin: 10px;
+  border-radius: 5px;
+  height: 30px;
+}
+select {
+  margin: 10px;
+  height: 30px;
+  border-radius: 5px;
+}
+.SendButton {
+  border-radius: 10px;
+  padding: 10px;
+  width: 60%;
+  align-self: center;
+  background-color: var(--color1);
+  color: white;
+  font-weight: bolder;
+}
+/*
+Preview Screen
+*/
+
+.convertidor-uploadFile {
+  
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: var(--color2);
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+.ComprobantesBlock{
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+  background-color: var(--color1);
+  border-radius: 20px;
+  overflow-x: auto; /* Habilita el scroll horizontal */
+  width: 800px;
+
+}
+
+.Comprobante{
+  margin: 10px;
+  background-color: var(--background2);
+  padding: 10px;
+  border-radius: 10px;
+  width: 900px;
+  display: inline-block;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

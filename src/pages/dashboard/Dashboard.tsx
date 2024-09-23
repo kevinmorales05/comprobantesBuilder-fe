@@ -19,12 +19,13 @@ export const Dashboard = () => {
     navigate("/preview");
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="MainBlock">
+      <h1>Generador de Comprobantes</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="FormBlock">
         {/* register your input into the hook by invoking the "register" function */}
         <label htmlFor="">Escoger la Empresa</label>
         <select id="empresa" {...register("empresa")}>
-          <option value="Tensored">Tensored</option>
+          <option value="Tesored">Tesored</option>
           <option value="Traxwire">TraxWire</option>
         </select>
         {errors.empresa && <span>El campo es obligatorio</span>}
@@ -42,7 +43,7 @@ export const Dashboard = () => {
         />
         {errors.emailToSend && <span>El campo es obligatorio</span>}
 
-        <input type="submit" />
+        <input className="SendButton" type="submit" />
       </form>
     </div>
   );

@@ -13,7 +13,7 @@ function App() {
   const [correo, setCorreo] = useState<string>("");
 
   return (
-    <UserContext.Provider value={{empresa, setEmpresa, correo, setCorreo}}>
+    <UserContext.Provider value={{empresa, setEmpresa, correo, setCorreo}} >
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />
