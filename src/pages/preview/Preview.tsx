@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserContext";
 import Papa from "papaparse";
 import { Comprobante, FormatToSend } from "../../types/types";
 import axios from "axios";
-import HorizontalScroll from "react-scroll-horizontal";
+import { Audio } from "react-loader-spinner";
 
 interface CsvData {
   [key: string]: string;
@@ -18,8 +18,8 @@ export default function Preview() {
   const notaDefault: string =
     "Su comprobante electrónico de transacción ha sido generadoexitosamente. Puede verificar y consultar losdetalles en la página oficial de Banxico para obtener información adicional. Más detalles en: https://www.banxico.org.mx/comprobante-electronico.html";
 
-  //console.log('empresa ', empresa);
-  //const context = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //setDownloadedJson(false);
     //setErrorsList(null);
@@ -195,6 +195,7 @@ export default function Preview() {
           },
           data: dataInfo,
         };
+        setLoading(true);
         axios
           .request(config)
           .then((response) => {
@@ -203,7 +204,9 @@ export default function Preview() {
             console.log("response ", response);
             if (response.status === 200) {
               console.log("yes it is 200");
+              setLoading(false);
               alert("Comprobantes enviados con éxito!");
+              
             }
           })
           .catch((error) => {
@@ -215,12 +218,19 @@ export default function Preview() {
             };
           });
       } catch (error) {
+        setLoading(false);
         console.log("error al enviar comprobante!", error);
+        alert(
+            `Error: ${error}`
+        );
+
       }
     } else {
+      setLoading(false);
       alert(
         "El archivo está vacío o no cumple con los criterios para convertirlo!"
       );
+
     }
   }
 
@@ -236,7 +246,21 @@ export default function Preview() {
   const child = { width: `30em`, height: `100%` };
   return (
     <div className="MainBlock">
-      <div className="FormBlock">
+      {loading ? (
+        <>
+          <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="#fff"
+            ariaLabel="loading"
+            wrapperStyle
+            wrapperClass
+          />
+        </>
+      ) : (
+        <>
+        <div className="FormBlock">
         <h1> Visualización Comprobantes</h1>
         <p>
           {" "}
@@ -311,6 +335,9 @@ export default function Preview() {
           )}
         </div>
       </div>
+        </>
+      )}
+      
     </div>
   );
 }
