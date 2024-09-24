@@ -12,13 +12,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --background: #2F4550;
-  --background2: #B8DBD9;
+  --background: #2f4550;
+  --background2: #b8dbd9;
   --color1: #000;
-  --color2: #586F7C;
-  --color3: #F4F4F9;
-
-
+  --color2: #586f7c;
+  --color3: #f4f4f9;
 }
 
 a {
@@ -72,7 +70,7 @@ Dashboard Screen
   flex-direction: column;
 }
 .FormBlock {
-  background-color: var(--background2) ;
+  background-color: var(--background2);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -115,7 +113,6 @@ Preview Screen
 */
 
 .convertidor-uploadFile {
-  
   margin: 0 auto;
   margin-top: 20px;
   background-color: var(--color2);
@@ -124,7 +121,7 @@ Preview Screen
   padding: 20px;
 }
 
-.ComprobantesBlock{
+.ComprobantesBlock {
   display: flex;
   flex-direction: row;
   padding: 30px;
@@ -132,10 +129,9 @@ Preview Screen
   border-radius: 20px;
   overflow-x: auto; /* Habilita el scroll horizontal */
   width: 800px;
-
 }
 
-.Comprobante{
+.Comprobante {
   margin: 10px;
   background-color: var(--background2);
   padding: 10px;
@@ -154,4 +150,36 @@ Preview Screen
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .FormBlock {
+    width: 90%;
+  }
+  .DatosBlock {
+    width: 100%;
+  }
+  .ComprobantesBlock {
+    width: 80%;
+  }
+  .MainBlock {
+    width: 100%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

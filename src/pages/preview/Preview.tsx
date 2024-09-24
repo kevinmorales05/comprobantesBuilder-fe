@@ -206,7 +206,6 @@ export default function Preview() {
               console.log("yes it is 200");
               setLoading(false);
               alert("Comprobantes enviados con éxito!");
-              
             }
           })
           .catch((error) => {
@@ -220,17 +219,13 @@ export default function Preview() {
       } catch (error) {
         setLoading(false);
         console.log("error al enviar comprobante!", error);
-        alert(
-            `Error: ${error}`
-        );
-
+        alert(`Error: ${error}`);
       }
     } else {
       setLoading(false);
       alert(
         "El archivo está vacío o no cumple con los criterios para convertirlo!"
       );
-
     }
   }
 
@@ -260,84 +255,88 @@ export default function Preview() {
         </>
       ) : (
         <>
-        <div className="FormBlock">
-        <h1> Visualización Comprobantes</h1>
-        <p>
-          {" "}
-          <b>Empresa:</b> {empresa}
-        </p>
-        <p>Suba el archivo a convertir</p>
-        <input
-          className="convertidor-uploadFile"
-          type="file"
-          accept=".csv"
-          onChange={handleFileChange}
-          name="Subir un archivo"
-          placeholder="Subir archivo"
-        />
+          <div className="FormBlock">
+            <h1> Visualización Comprobantes</h1>
+            <p>
+              {" "}
+              <b>Empresa:</b> {empresa}
+            </p>
+            <p>Suba el archivo a convertir</p>
+            <input
+              className="convertidor-uploadFile"
+              type="file"
+              accept=".csv"
+              onChange={handleFileChange}
+              name="Subir un archivo"
+              placeholder="Subir archivo"
+            />
 
-        <p>Aqui va un componente para mostrar la lista de los comprobantes</p>
-        <button
-          onClick={() => {
-            convertJsonAndSend();
-          }}
-        >
-          Enviar Reporte
-        </button>
-      </div>
-      <div>
-        <h1>Datos Disponibles</h1>
-        <div className="ComprobantesBlock">
-          {data ? (
+            <p>
+              Aqui va un componente para mostrar la lista de los comprobantes
+            </p>
+            <button
+              onClick={() => {
+                convertJsonAndSend();
+              }}
+            >
+              Enviar Reporte
+            </button>
+          </div>
+          <div className="DatosBlock">
+            <h1>Datos Disponibles</h1>
             <div className="ComprobantesBlock">
-              {data.map((comprobante) => {
-                return (
-                  <>
-                    <div className="Comprobante" key={comprobante.referencia}>
-                      <p>
-                        {" "}
-                        <b> Beneficiario:</b> {comprobante.beneficiario}
-                      </p>
-                      <p>
-                        <b> Institución: </b> {comprobante.institucion}
-                      </p>
-                      <p>
-                        <b> Concepto: </b> {comprobante.concepto}
-                      </p>
-                      <p>
-                        {" "}
-                        <b> Cantidad:</b> {comprobante.amount}
-                      </p>
-                      <p>
-                        <b> Fecha: </b> {comprobante.fecha}
-                      </p>
-                      <p>
-                        {" "}
-                        <b> Hora:</b> {comprobante.hora}
-                      </p>
-                      <button
-                        onClick={() => {
-                          console.log("delete ", comprobante.referencia);
-                          eliminarComprobante(comprobante.referencia);
-                        }}
-                      >
-                        Remover
-                      </button>
-                    </div>
-                  </>
-                );
-              })}
+              {data ? (
+                <div className="ComprobantesBlock">
+                  {data.map((comprobante) => {
+                    return (
+                      <>
+                        <div
+                          className="Comprobante"
+                          key={comprobante.referencia}
+                        >
+                          <p>
+                            {" "}
+                            <b> Beneficiario:</b> {comprobante.beneficiario}
+                          </p>
+                          <p>
+                            <b> Institución: </b> {comprobante.institucion}
+                          </p>
+                          <p>
+                            <b> Concepto: </b> {comprobante.concepto}
+                          </p>
+                          <p>
+                            {" "}
+                            <b> Cantidad:</b> {comprobante.amount}
+                          </p>
+                          <p>
+                            <b> Fecha: </b> {comprobante.fecha}
+                          </p>
+                          <p>
+                            {" "}
+                            <b> Hora:</b> {comprobante.hora}
+                          </p>
+                          <button
+                            onClick={() => {
+                              console.log("delete ", comprobante.referencia);
+                              eliminarComprobante(comprobante.referencia);
+                            }}
+                          >
+                            Remover
+                          </button>
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
+              ) : (
+                <>
+                  <p>No hay información que mostrar</p>
+                </>
+              )}
             </div>
-          ) : (
-            <>
-              <p>No hay información que mostrar</p>
-            </>
-          )}
-        </div>
-      </div>
+          </div>
         </>
       )}
-      
     </div>
   );
 }
