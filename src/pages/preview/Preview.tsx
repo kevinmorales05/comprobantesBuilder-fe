@@ -15,6 +15,8 @@ export default function Preview() {
   const [dataConverted] = useState<CsvData[]>([]);
   const [fileToUpload, setFileToUpload] = useState("");
   const [uploadedFile, setUploadedFile] = useState(false);
+  const notaDefault: string =
+    "Su comprobante electrónico de transacción ha sido generadoexitosamente. Puede verificar y consultar losdetalles en la página oficial de Banxico para obtener información adicional. Más detalles en: https://www.banxico.org.mx/comprobante-electronico.html";
 
   //console.log('empresa ', empresa);
   //const context = useContext(UserContext);
@@ -26,12 +28,11 @@ export default function Preview() {
     // console.log("archivo nombre", file.name);
 
     setFileToUpload(file.name);
-    
-    console.log('changing data right now');
+
+    console.log("changing data right now");
     if (file) {
-      
-      if(empresa === 'Tesored'){
-        console.log('va por tesored!')
+      if (empresa === "Tesored") {
+        console.log("va por tesored!");
         Papa.parse(file, {
           header: true,
           skipEmptyLines: true,
@@ -42,14 +43,14 @@ export default function Preview() {
               for (let i = 0; i < results.data.length; i++) {
                 const referencia = results.data[i]["Id Transaccion"];
                 const var2 = results.data[i]["Fecha Recepcion"];
-  
+
                 const var3 = results.data[i]["Importe Destino"];
                 const var4 = results.data[i]["Divisa Destino"];
                 const fechaEstado = results.data[i]["Fecha Estado"];
                 console.log("fecha normal ", fechaEstado);
                 const fechaCompleta = fechaEstado.split(" ");
                 console.log("fecha separada ", fechaCompleta);
-  
+
                 const var6 = results.data[i]["Estado"];
                 const operacion = results.data[i]["Razon Estado"];
                 const var8 = results.data[i]["ConfirmationNM"];
@@ -83,7 +84,7 @@ export default function Preview() {
                 const var36 = results.data[i]["Codigo Zip Ben"];
                 const var37 = results.data[i]["Telefono Ben"];
                 const beneficiario = results.data[i]["Titular"];
-                console.log("beneficiario ",beneficiario);
+                console.log("beneficiario ", beneficiario);
                 const var39 = results.data[i]["Idperson"];
                 const var40 = results.data[i]["Tipo Cambio Banxico"];
                 const var41 = results.data[i]["Agencia"];
@@ -98,7 +99,7 @@ export default function Preview() {
                   referencia: referencia,
                   concepto: conceptoPago,
                   clave: clave,
-                  nota: "no hay notas",
+                  nota: notaDefault,
                   fecha: fechaCompleta[0],
                   hora: fechaCompleta[1],
                   amount: amount,
@@ -116,9 +117,8 @@ export default function Preview() {
           },
         });
         setUploadedFile(true);
-      }
-      else {
-        console.log('it is traxwire!');
+      } else {
+        console.log("it is traxwire!");
         Papa.parse(file, {
           header: true,
           skipEmptyLines: true,
@@ -127,7 +127,7 @@ export default function Preview() {
             if (results.data.length > 0) {
               let comprobantes: Comprobante[] = [];
               for (let i = 0; i < results.data.length; i++) {
-                const abono  = results.data[i]["Abono"];
+                const abono = results.data[i]["Abono"];
                 const cargo = results.data[i]["Cargo"];
                 const claveRastreo = results.data[i]["Clave de Rastreo"];
                 const divisaDestino = results.data[i]["Divisa Destino"];
@@ -156,22 +156,21 @@ export default function Preview() {
                   registroEmpresa: "Registro CNBV 22493",
                   direccionEmpresa:
                     "San Lorenzo 153 int 1006, Col. Tlacoquemecatl, 03200, CDMX",
-                    cargo: cargo !== "" ? cargo : "",
-                    abono: abono !== "" ? abono : "",
-                    saldo: saldo,
+                  cargo: cargo !== "" ? cargo : "-",
+                  abono: abono !== "" ? abono : "-",
+                  saldo: saldo,
                 };
                 comprobantes.push(comprobante);
                 //console.log("lista de comprobantes ", comprobantes);
               }
-              console.log(comprobantes[0])
+              console.log(comprobantes[0]);
               setData(comprobantes);
             }
           },
         });
         setUploadedFile(true);
-
       }
-      console.log('nothing happen');
+      console.log("nothing happen");
     }
   };
 
@@ -233,8 +232,8 @@ export default function Preview() {
     console.log("eliminando!");
     setData(nuevoArreglo);
   };
-  const parent  = { width: `60em`, height: `100%`};
-  const child   = { width: `30em`, height: `100%`}
+  const parent = { width: `60em`, height: `100%` };
+  const child = { width: `30em`, height: `100%` };
   return (
     <div className="MainBlock">
       <div className="FormBlock">
@@ -266,46 +265,45 @@ export default function Preview() {
         <h1>Datos Disponibles</h1>
         <div className="ComprobantesBlock">
           {data ? (
-              <div className="ComprobantesBlock">
-                {data.map((comprobante) => {
-                  return (
-                    <>
-                      <div className="Comprobante" key={comprobante.referencia} >
-                        <p>
-                          {" "}
-                          <b> Beneficiario:</b> {comprobante.beneficiario}
-                        </p>
-                        <p>
-                          <b> Institución: </b> {comprobante.institucion}
-                        </p>
-                        <p>
-                          <b> Concepto: </b> {comprobante.concepto}
-                        </p>
-                        <p>
-                          {" "}
-                          <b> Cantidad:</b> {comprobante.amount}
-                        </p>
-                        <p>
-                          <b> Fecha: </b> {comprobante.fecha}
-                        </p>
-                        <p>
-                          {" "}
-                          <b> Hora:</b> {comprobante.hora}
-                        </p>
-                        <button
-                          onClick={() => {
-                            console.log("delete ", comprobante.referencia);
-                            eliminarComprobante(comprobante.referencia);
-                          }}
-                        >
-                          Remover
-                        </button>
-                      </div>
-                    </>
-                  );
-                })}
-              </div>
-           
+            <div className="ComprobantesBlock">
+              {data.map((comprobante) => {
+                return (
+                  <>
+                    <div className="Comprobante" key={comprobante.referencia}>
+                      <p>
+                        {" "}
+                        <b> Beneficiario:</b> {comprobante.beneficiario}
+                      </p>
+                      <p>
+                        <b> Institución: </b> {comprobante.institucion}
+                      </p>
+                      <p>
+                        <b> Concepto: </b> {comprobante.concepto}
+                      </p>
+                      <p>
+                        {" "}
+                        <b> Cantidad:</b> {comprobante.amount}
+                      </p>
+                      <p>
+                        <b> Fecha: </b> {comprobante.fecha}
+                      </p>
+                      <p>
+                        {" "}
+                        <b> Hora:</b> {comprobante.hora}
+                      </p>
+                      <button
+                        onClick={() => {
+                          console.log("delete ", comprobante.referencia);
+                          eliminarComprobante(comprobante.referencia);
+                        }}
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
           ) : (
             <>
               <p>No hay información que mostrar</p>
