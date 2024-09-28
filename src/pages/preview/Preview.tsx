@@ -104,10 +104,10 @@ export default function Preview() {
                   hora: fechaCompleta[1],
                   amount: amount,
                   company: "Tesored",
-                  nombreEmpresa: "Taxwire, SA de CV",
-                  registroEmpresa: "Registro CNBV 22493",
+                  nombreEmpresa: "TESORED, S.A. DE C.V.",
+                  registroEmpresa: "Registro CNBV 44244",
                   direccionEmpresa:
-                    "San Lorenzo 153 int 1006, Col. Tlacoquemecatl, 03200, CDMX",
+                    "AV. CENTRAL 206 PISO 2 COL.SAN PEDRO DE LOS PINOS, ALVARO OBREGON, C.P. 01180, CIUDAD DE MÉXICO",
                 };
                 comprobantes.push(comprobante);
                 console.log("lista de comprobantes ", comprobantes);
@@ -187,7 +187,7 @@ export default function Preview() {
         const config = {
           method: "post",
           maxBodyLength: Infinity,
-          // url: process.env.EMAI_SERVER_URL,
+          //url: 'https://comprobantesbuilder-be.onrender.com/buildcomprobante/generate',
           url: "http://localhost:3000/buildcomprobante/generate",
           headers: {
             Accept: "application/json",
