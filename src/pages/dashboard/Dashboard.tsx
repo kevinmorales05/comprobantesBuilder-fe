@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserContext";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const { setCorreo, setEmpresa } = useContext(UserContext);
+  const { setCorreo, setEmpresa, setDatos } = useContext(UserContext);
 
   const {
     register,
@@ -16,6 +16,7 @@ export const Dashboard = () => {
     console.log(data);
     setCorreo(data.emailToSend);
     setEmpresa(data.empresa);
+    setDatos(data.datos);
     navigate("/preview");
   };
   return (
@@ -29,6 +30,12 @@ export const Dashboard = () => {
           <option value="Traxwire">TraxWire</option>
         </select>
         {errors.empresa && <span>El campo es obligatorio</span>}
+        <label htmlFor="">Ingresar Datos</label>
+        <select id="empresa" {...register("datos")}>
+          <option value="auto">Automático</option>
+          <option value="manual">Manual</option>
+        </select>
+        {errors.datos && <span>El campo es obligatorio</span>}
 
         <label htmlFor="">Escribir el correo del destinatario</label>
         <input

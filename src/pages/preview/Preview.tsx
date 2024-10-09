@@ -4,13 +4,14 @@ import Papa from "papaparse";
 import { Comprobante, FormatToSend } from "../../types/types";
 import axios from "axios";
 import { Audio } from "react-loader-spinner";
+import ManualComprobantes from "../../components/ManualAdd/ManualComprobantes";
 
 interface CsvData {
   [key: string]: string;
 }
 
 export default function Preview() {
-  const { empresa, correo } = useContext(UserContext);
+  const { empresa, correo, datos } = useContext(UserContext);
   const [data, setData] = useState<Comprobante[]>();
   const [dataConverted] = useState<CsvData[]>([]);
   const [fileToUpload, setFileToUpload] = useState("");
@@ -19,6 +20,7 @@ export default function Preview() {
     "Su comprobante electrónico de transacción ha sido generadoexitosamente. Puede verificar y consultar losdetalles en la página oficial de Banxico para obtener información adicional. Más detalles en: https://www.banxico.org.mx/comprobante-electronico.html";
 
   const [loading, setLoading] = useState(false);
+  console.log(datos);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //setDownloadedJson(false);
@@ -255,33 +257,45 @@ export default function Preview() {
         </>
       ) : (
         <>
-          <div className="FormBlock">
-            <h1> Visualización Comprobantes</h1>
-            <p>
-              {" "}
-              <b>Empresa:</b> {empresa}
-            </p>
-            <p>Suba el archivo a convertir</p>
-            <input
-              className="convertidor-uploadFile"
-              type="file"
-              accept=".csv"
-              onChange={handleFileChange}
-              name="Subir un archivo"
-              placeholder="Subir archivo"
-            />
+          <>
+            {datos === "auto" ? (
+              <>
+                {" "}
+                <div className="FormBlock">
+                  <h1> Visualización Comprobantes</h1>
+                  <p>
+                    {" "}
+                    <b>Empresa:</b> {empresa}
+                  </p>
+                  <p>Suba el archivo a convertir</p>
+                  <input
+                    className="convertidor-uploadFile"
+                    type="file"
+                    accept=".csv"
+                    onChange={handleFileChange}
+                    name="Subir un archivo"
+                    placeholder="Subir archivo"
+                  />
 
-            <p>
-              Aqui va un componente para mostrar la lista de los comprobantes
-            </p>
-            <button
-              onClick={() => {
-                convertJsonAndSend();
-              }}
-            >
-              Enviar Reporte
-            </button>
-          </div>
+                  <p>
+                    Aqui va un componente para mostrar la lista de los
+                    comprobantes
+                  </p>
+                  <button
+                    onClick={() => {
+                      convertJsonAndSend();
+                    }}
+                  >
+                    Enviar Reporte
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+              <ManualComprobantes tipo="hola" empresa={empresa} data={data} setData={setData} />
+              </>
+            )}
+          </>
           <div className="DatosBlock">
             <h1>Datos Disponibles</h1>
             <div className="ComprobantesBlock">

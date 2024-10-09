@@ -11,9 +11,10 @@ import { UserContext } from "./context/UserContext.ts";
 function App() {
   const [empresa, setEmpresa] = useState<string>("");
   const [correo, setCorreo] = useState<string>("");
+  const [ datos, setDatos] = useState<string>("");
 
   return (
-    <UserContext.Provider value={{empresa, setEmpresa, correo, setCorreo}} >
+    <UserContext.Provider value={{empresa, setEmpresa, correo, setCorreo, datos, setDatos}} >
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />
