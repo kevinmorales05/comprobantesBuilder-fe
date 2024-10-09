@@ -30,7 +30,7 @@ export const Dashboard = () => {
           <option value="Traxwire">TraxWire</option>
         </select>
         {errors.empresa && <span>El campo es obligatorio</span>}
-        <label htmlFor="">Ingresar Datos</label>
+        <label htmlFor="">Ingreso de Datos</label>
         <select id="empresa" {...register("datos")}>
           <option value="auto">Automático</option>
           <option value="manual">Manual</option>

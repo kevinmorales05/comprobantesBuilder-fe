@@ -9,13 +9,68 @@ interface structure {
 }
 
 export default function ManualComprobantes(props: structure) {
+  const notaDefault: string =
+    "Su comprobante electrónico de transacción ha sido generadoexitosamente. Puede verificar y consultar losdetalles en la página oficial de Banxico para obtener información adicional. Más detalles en: https://www.banxico.org.mx/comprobante-electronico.html";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (info: any) => {
-    console.log(info);
+    if (props.empresa === "Tesored") {
+      console.log("va por tesored!");
+      console.log(info);
+      const newComprobante: Comprobante = {
+        operacion: info.operacion,
+        beneficiario: info.beneficiario,
+        institucion: info.institucion,
+        cuenta: info.cuenta,
+        referencia: info.referencia,
+        concepto: info.concepto,
+        clave: info.clave,
+        nota: notaDefault,
+        fecha: "",
+        hora: "",
+        amount: info.cantidad,
+        company: "Tesored",
+        nombreEmpresa: "TESORED, S.A. DE C.V.",
+        registroEmpresa: "Registro CNBV 44244",
+        direccionEmpresa:
+          "AV. CENTRAL 206 PISO 2 COL.SAN PEDRO DE LOS PINOS, ALVARO OBREGON, C.P. 01180, CIUDAD DE MÉXICO",
+      };
+      props.setData((prevData) => [...prevData, newComprobante]);
+
+    } else {
+      console.log("vamos por traxwire");
+      console.log(info);
+      const newComprobante: Comprobante = {
+        operacion: info.movimiento,
+        beneficiario: info.ordenante,
+        institucion: "",
+        cuenta: "",
+        referencia: info.referenciaNum,
+        concepto: info.referencia,
+        clave: info.clave,
+        nota: notaDefault,
+        fecha: "si hay",
+        hora: "",
+        amount: info.cantidad,
+        company: "Traxwire",
+                  nombreEmpresa: "Taxwire, SA de CV",
+                  registroEmpresa: "Registro CNBV 22493",
+                  direccionEmpresa:
+                    "San Lorenzo 153 int 1006, Col. Tlacoquemecatl, 03200, CDMX",
+                    cargo: info.datos !== "cargo" ? info.cargo : "-",
+                    abono: info.datos !== "abono" ? info.abono : "-",
+                    saldo: info.saldo,            
+        };
+      props.setData((prevData) => [...prevData, newComprobante]);
+
+
+
+
+    }
   };
   return (
     <div>
@@ -76,6 +131,16 @@ export default function ManualComprobantes(props: structure) {
               placeholder="R343242342343"
             />
             {errors.referencia && <span>El campo es obligatorio</span>}
+
+            <label htmlFor="">Concepto de Pago</label>
+            <input
+              type="text"
+              {...register("concepto", {
+                required: true,
+              })}
+              placeholder="R343242342343"
+            />
+            {errors.concepto && <span>El campo es obligatorio</span>}
 
             <label htmlFor="">Clave de rastreo</label>
             <input

@@ -12,7 +12,7 @@ interface CsvData {
 
 export default function Preview() {
   const { empresa, correo, datos } = useContext(UserContext);
-  const [data, setData] = useState<Comprobante[]>();
+  const [data, setData] = useState<Comprobante[]>([]);
   const [dataConverted] = useState<CsvData[]>([]);
   const [fileToUpload, setFileToUpload] = useState("");
   const [uploadedFile, setUploadedFile] = useState(false);
@@ -41,7 +41,7 @@ export default function Preview() {
           complete: (results) => {
             //console.log("results ", results.data);
             if (results.data.length > 0) {
-              let comprobantes: Comprobante[] = [];
+              const comprobantes: Comprobante[] = [];
               for (let i = 0; i < results.data.length; i++) {
                 const referencia = results.data[i]["Id Transaccion"];
                 const var2 = results.data[i]["Fecha Recepcion"];
@@ -293,6 +293,13 @@ export default function Preview() {
             ) : (
               <>
               <ManualComprobantes tipo="hola" empresa={empresa} data={data} setData={setData} />
+              <button
+                    onClick={() => {
+                      convertJsonAndSend();
+                    }}
+                  >
+                    Enviar Reporte
+                  </button>
               </>
             )}
           </>
