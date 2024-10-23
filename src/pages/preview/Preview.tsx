@@ -5,6 +5,7 @@ import { Comprobante, FormatToSend } from "../../types/types";
 import axios from "axios";
 import { Audio } from "react-loader-spinner";
 import ManualComprobantes from "../../components/ManualAdd/ManualComprobantes";
+import { convertStringNumbers } from "../../utils/tools";
 
 interface CsvData {
   [key: string]: string;
@@ -61,7 +62,8 @@ export default function Preview() {
                 const var11 = results.data[i]["Agente"];
                 const institucion = results.data[i]["Acronimo Banco"];
                 const var13 = results.data[i]["ID Movimiento Venta"];
-                const amount = results.data[i]["Importe Origen"];
+                let amount = results.data[i]["Importe Origen"];
+                amount = convertStringNumbers(Number(amount));
                 const var15 = results.data[i]["Divisa Origen"];
                 const var16 = results.data[i]["Tipo Cambio"];
                 const var17 = results.data[i]["Codigo Estado Origen"];
@@ -189,8 +191,7 @@ export default function Preview() {
         const config = {
           method: "post",
           maxBodyLength: Infinity,
-          //url: 'https://comprobantesbuilder-be.onrender.com/buildcomprobante/generate',
-          url: "http://localhost:3000/buildcomprobante/generate",
+          url: "https://comprobantesbuilder-be-3abd.onrender.com/buildcomprobante/generate",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
