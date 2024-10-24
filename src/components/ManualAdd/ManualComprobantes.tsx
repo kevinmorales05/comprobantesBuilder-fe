@@ -1,5 +1,6 @@
 import { Comprobante } from "../../types/types";
 import { useForm } from "react-hook-form";
+import { convertStringNumbers } from "../../utils/tools";
 
 interface structure {
   tipo: string;
@@ -40,14 +41,16 @@ export default function ManualComprobantes(props: structure) {
           "AV. CENTRAL 206 PISO 2 COL.SAN PEDRO DE LOS PINOS, ALVARO OBREGON, C.P. 01180, CIUDAD DE MÉXICO",
       };
       props.setData((prevData) => [...prevData, newComprobante]);
-
     } else {
       console.log("vamos por traxwire");
-      console.log(info);
+      console.log("this is the info",info);
+      console.log(info.datos === "cargo" ? info.cantidad : "-");
+      console.log(info.datos === "abono" ? info.cantidad : "-");
+      //amount = convertStringNumbers(Number(amount));
       const newComprobante: Comprobante = {
         operacion: info.movimiento,
         beneficiario: info.ordenante,
-        institucion: "",
+        institucion: "-",
         cuenta: "",
         referencia: info.referenciaNum,
         concepto: info.referencia,
@@ -55,21 +58,17 @@ export default function ManualComprobantes(props: structure) {
         nota: notaDefault,
         fecha: info.fecha,
         hora: info.hora,
-        amount: info.cantidad,
+        amount: convertStringNumbers(Number(info.cantidad)),
         company: "Traxwire",
-                  nombreEmpresa: "Taxwire, SA de CV",
-                  registroEmpresa: "Registro CNBV 22493",
-                  direccionEmpresa:
-                    "San Lorenzo 153 int 1006, Col. Tlacoquemecatl, 03200, CDMX",
-                    cargo: info.datos !== "cargo" ? info.cargo : "-",
-                    abono: info.datos !== "abono" ? info.abono : "-",
-                    saldo: info.saldo,            
-        };
+        nombreEmpresa: "Taxwire, SA de CV",
+        registroEmpresa: "Registro CNBV 22493",
+        direccionEmpresa:
+          "San Lorenzo 153 int 1006, Col. Tlacoquemecatl, 03200, CDMX",
+        cargo: info.datos === "cargo" ? convertStringNumbers(Number(info.cantidad)) : "-",
+        abono: info.datos === "abono" ? convertStringNumbers(Number(info.cantidad)) : "-",
+        saldo: convertStringNumbers(Number(info.saldo)),
+      };
       props.setData((prevData) => [...prevData, newComprobante]);
-
-
-
-
     }
   };
   return (
