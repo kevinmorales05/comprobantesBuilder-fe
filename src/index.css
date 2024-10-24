@@ -154,17 +154,29 @@ Preview Screen
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+  .MainBlock {
+    justify-content: center;
+    width: 95%;
+    margin: 0 auto;
+  }
   .FormBlock {
-    width: 90%;
+    width: 95%;
   }
   .DatosBlock {
-    width: 100%;
+    width: 95%;
   }
   .ComprobantesBlock {
-    width: 80%;
+    width: 95%;
+    flex-direction: column;
+    align-items: center;
+    height: 600px;
+    padding-top: 10px;
+
   }
-  .MainBlock {
-    width: 100%;
+ 
+  .Comprobante {
+    width: 90%;
+
   }
 }
 

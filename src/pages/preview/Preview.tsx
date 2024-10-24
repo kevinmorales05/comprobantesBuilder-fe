@@ -6,6 +6,7 @@ import axios from "axios";
 import { Audio } from "react-loader-spinner";
 import ManualComprobantes from "../../components/ManualAdd/ManualComprobantes";
 import { convertStringNumbers } from "../../utils/tools";
+import './Preview.css';
 
 interface CsvData {
   [key: string]: string;
