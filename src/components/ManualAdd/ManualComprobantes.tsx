@@ -30,8 +30,8 @@ export default function ManualComprobantes(props: structure) {
         concepto: info.concepto,
         clave: info.clave,
         nota: notaDefault,
-        fecha: "",
-        hora: "",
+        fecha: info.fecha,
+        hora: info.hora,
         amount: info.cantidad,
         company: "Tesored",
         nombreEmpresa: "TESORED, S.A. DE C.V.",
@@ -53,8 +53,8 @@ export default function ManualComprobantes(props: structure) {
         concepto: info.referencia,
         clave: info.clave,
         nota: notaDefault,
-        fecha: "si hay",
-        hora: "",
+        fecha: info.fecha,
+        hora: info.hora,
         amount: info.cantidad,
         company: "Traxwire",
                   nombreEmpresa: "Taxwire, SA de CV",
@@ -161,6 +161,25 @@ export default function ManualComprobantes(props: structure) {
               placeholder="$324.5"
             />
             {errors.cantidad && <span>El campo es obligatorio</span>}
+            <label htmlFor="">Fecha</label>
+
+            <input
+              type="date"
+              {...register("fecha", {
+                required: true,
+              })}
+              placeholder="03/30/2024"
+            />
+            {errors.fecha && <span>El campo es obligatorio</span>}
+            <label htmlFor="">Hora</label>
+            <input
+              type="time"
+              {...register("hora", {
+                required: true,
+              })}
+              placeholder="03/30/2024"
+            />
+            {errors.hora && <span>El campo es obligatorio</span>}
 
             <input className="SendButton" type="submit" value={"Agregar"} />
           </form>
@@ -247,6 +266,23 @@ export default function ManualComprobantes(props: structure) {
               placeholder="$1123.5"
             />
             {errors.saldo && <span>El campo es obligatorio</span>}
+            <input
+              type="date"
+              {...register("fecha", {
+                required: true,
+              })}
+              placeholder="03/30/2024"
+            />
+            {errors.fecha && <span>El campo es obligatorio</span>}
+            <label htmlFor="">Hora</label>
+            <input
+              type="time"
+              {...register("hora", {
+                required: true,
+              })}
+              placeholder="03/30/2024"
+            />
+            {errors.hora && <span>El campo es obligatorio</span>}
 
             <input className="SendButton" type="submit" value={"Agregar"} />
           </form>
